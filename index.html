@@ -23,30 +23,52 @@
   --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
   --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --acc-rgb:159,211,199;
+  --bg-rgb:6,12,19;
+  --title:#dbe5ec;
+  --sub:#8597a8;
+  --sw-off:#24323f;
   color-scheme:dark;
+}
+/* Dopamine theme (toggled by the smiley switch) */
+:root.dopa{
+  --abyss:#2459a0;
+  --deep:#1d4b8c;
+  --panel:rgba(24,62,122,.72);
+  --line:rgba(255,255,255,.22);
+  --fg:#ffffff;
+  --muted:#c9d6ee;
+  --glass:#f08fb3;
+  --acc-rgb:240,143,179;
+  --bg-rgb:36,89,160;
+  --title:#db6e97;
+  --sub:#ffffff;
+  --sw-off:#173f78;
+  --transit:#e6e9f2;
+  --dumped:#7fe0ff;
+  --drift:#ffe066;
+  --far:#ff4f9a;
 }
 html,body{height:100%}
 [hidden]{display:none!important}
 body{margin:0;background:var(--abyss);color:var(--fg);font-family:var(--body);overflow:hidden}
-#stage{position:fixed;inset:0;background:radial-gradient(120% 90% at 50% 42%,#0f2234 0%,#08121c 45%,var(--abyss) 80%)}
-#stage canvas{display:block;outline:none;position:relative;z-index:1}
-#bigtype{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding-left:max(16px,env(safe-area-inset-left,0px));pointer-events:none;user-select:none;z-index:0;overflow:hidden}
-#bigtype span{display:block;font-family:var(--display);font-weight:800;text-transform:uppercase;line-height:.84;letter-spacing:.01em;color:#132a3e;white-space:nowrap}
+#stage{position:fixed;inset:0;background:var(--abyss)}
+#stage canvas{display:block;outline:none}
 .ui{position:fixed;z-index:5}
 button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--glass);outline-offset:2px}
 
 /* Header */
 #brand{top:calc(14px + env(safe-area-inset-top,0px));left:max(16px,env(safe-area-inset-left,0px));max-width:min(420px,60vw);pointer-events:none}
-#brand h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:.04em;line-height:.95;margin:0;text-transform:uppercase}
-#brand p{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.45;text-wrap:balance}
-#brand .tag{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glass);border:1px solid rgba(159,211,199,.35);padding:3px 7px;border-radius:3px}
+#brand h1{color:var(--title);font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:.04em;line-height:.95;margin:0;text-transform:uppercase}
+#brand p{margin:6px 0 0;color:var(--sub);font-size:13px;line-height:1.45;text-wrap:balance}
+#brand .tag{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glass);border:1px solid rgba(var(--acc-rgb),.35);padding:3px 7px;border-radius:3px}
 
 /* Orbit pad */
 #orbit{left:max(16px,env(safe-area-inset-left,0px));top:50%;transform:translateY(-50%);display:grid;grid-template-columns:repeat(3,40px);grid-auto-rows:40px;gap:4px;padding:8px;background:var(--panel);border:1px solid var(--line);border-radius:10px;backdrop-filter:blur(8px)}
 #orbit button{background:transparent;border:1px solid var(--line);border-radius:6px;cursor:pointer;display:grid;place-items:center;color:var(--fg)}
-#orbit button:hover{background:rgba(159,211,199,.1);border-color:rgba(159,211,199,.4)}
-#orbit button[aria-pressed="true"]{background:rgba(159,211,199,.16);color:var(--glass);border-color:rgba(159,211,199,.5)}
+#orbit button:hover{background:rgba(var(--acc-rgb),.1);border-color:rgba(var(--acc-rgb),.4)}
+#orbit button[aria-pressed="true"]{background:rgba(var(--acc-rgb),.16);color:var(--glass);border-color:rgba(var(--acc-rgb),.5)}
 #orbit svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 #orbit .sep{grid-column:1/-1;height:1px;background:var(--line);margin:2px 0;align-self:center}
 #orbit .cap{grid-column:1/-1;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:center;align-self:center}
@@ -62,9 +84,9 @@ button{font:inherit;color:inherit}
 .tog .lbl{flex:1;min-width:0}
 .tog .lbl strong{display:block;font-weight:500;font-size:13.5px}
 .tog .lbl small{display:block;color:var(--muted);font-size:11.5px;line-height:1.35}
-.sw{flex:none;width:30px;height:17px;border-radius:9px;background:#24323f;position:relative;transition:background .2s}
+.sw{flex:none;width:30px;height:17px;border-radius:9px;background:var(--sw-off);position:relative;transition:background .2s}
 .sw::after{content:"";position:absolute;top:2px;left:2px;width:13px;height:13px;border-radius:50%;background:#7e8d99;transition:transform .2s,background .2s}
-.tog[aria-checked="true"] .sw{background:rgba(159,211,199,.35)}
+.tog[aria-checked="true"] .sw{background:rgba(var(--acc-rgb),.35)}
 .tog[aria-checked="true"] .sw::after{transform:translateX(13px);background:var(--glass)}
 .ico{flex:none;width:22px;height:22px;display:grid;place-items:center;color:var(--muted)}
 .ico svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
@@ -80,10 +102,10 @@ button{font:inherit;color:inherit}
 #layersBtn{display:none}
 
 /* Timeline dock */
-#dock{left:0;right:0;bottom:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-bottom:calc(14px + env(safe-area-inset-bottom,0px));padding-top:12px;background:linear-gradient(0deg,rgba(6,12,19,.96) 30%,rgba(6,12,19,0))}
-.dock-in{display:grid;grid-template-columns:auto auto 1fr auto;gap:16px;align-items:end;max-width:1400px;margin:0 auto}
-#play{width:48px;height:48px;border-radius:50%;border:1px solid rgba(159,211,199,.5);background:rgba(159,211,199,.12);color:var(--glass);cursor:pointer;display:grid;place-items:center}
-#play:hover{background:rgba(159,211,199,.22)}
+#dock{left:0;right:0;bottom:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-bottom:calc(14px + env(safe-area-inset-bottom,0px));padding-top:12px;background:linear-gradient(0deg,rgba(var(--bg-rgb),.96) 30%,rgba(var(--bg-rgb),0))}
+.dock-in{display:grid;grid-template-columns:auto auto auto 1fr auto;gap:16px;align-items:end;max-width:1400px;margin:0 auto}
+#play{width:48px;height:48px;border-radius:50%;border:1px solid rgba(var(--acc-rgb),.5);background:rgba(var(--acc-rgb),.12);color:var(--glass);cursor:pointer;display:grid;place-items:center}
+#play:hover{background:rgba(var(--acc-rgb),.22)}
 #play svg{width:20px;height:20px;fill:currentColor}
 .year{min-width:118px}
 .year b{display:block;font-family:var(--display);font-weight:800;font-size:46px;line-height:.85;letter-spacing:.02em;font-variant-numeric:tabular-nums}
@@ -101,8 +123,16 @@ button{font:inherit;color:inherit}
 .ticks span{position:absolute;transform:translateX(-50%);white-space:nowrap}
 .speed{display:flex;gap:4px;align-items:center;padding-bottom:4px}
 .speed button{background:none;border:1px solid var(--line);border-radius:4px;padding:5px 8px;font-family:var(--mono);font-size:11px;color:var(--muted);cursor:pointer}
-.speed button[aria-pressed="true"]{color:var(--glass);border-color:rgba(159,211,199,.5)}
+.speed button[aria-pressed="true"]{color:var(--glass);border-color:rgba(var(--acc-rgb),.5)}
 
+/* Theme switch (smiley) */
+#themeBtn{background:none;border:0;padding:4px;cursor:pointer;color:var(--title);display:grid;place-items:center;border-radius:12px;align-self:center}
+#themeBtn svg{width:72px;height:auto;display:block;overflow:visible}
+#themeBtn .pill{fill:none;stroke:currentColor;stroke-width:1.6px}
+#themeBtn .face{fill:currentColor;transform:translateX(-40.65px);transition:transform .35s cubic-bezier(.5,1.6,.4,1)}
+#themeBtn[aria-checked="true"] .face{transform:translateX(0)}
+#themeBtn:hover{background:rgba(var(--acc-rgb),.1)}
+.dopa .shp-bottle{display:none}
 /* Globe labels */
 #labels{position:fixed;inset:0;pointer-events:none;z-index:3}
 .gl{position:absolute;left:0;top:0;font-family:var(--mono);font-size:10px;color:var(--fg);white-space:nowrap;transform-origin:0 50%;display:flex;align-items:center;gap:6px;opacity:.9}
@@ -131,16 +161,16 @@ button{font:inherit;color:inherit}
   #layersBtn{display:block;position:fixed;right:max(16px,env(safe-area-inset-right,0px));top:calc(14px + env(safe-area-inset-top,0px));z-index:6;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 12px;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
   #layers{top:calc(58px + env(safe-area-inset-top,0px));width:min(300px,calc(100% - 32px));max-height:calc(100% - 230px)}
   #layers.closed{display:none}
-  .dock-in{grid-template-columns:auto 1fr;gap:10px 12px}
+  .dock-in{grid-template-columns:auto auto 1fr;gap:10px 12px}
   .track{grid-column:1/-1;order:3}
   .speed{grid-column:1/-1;order:4;justify-content:flex-end}
   .year b{font-size:38px}
 }
-@media (prefers-reduced-motion:reduce){.sw,.sw::after{transition:none}}
+@media (prefers-reduced-motion:reduce){.sw,.sw::after,#themeBtn .face{transition:none}}
 </style>
 </head>
 <body>
-<div id="stage" aria-label="Globe showing waste entering and drifting through the oceans"><div id="bigtype" aria-hidden="true"><span>Plastic</span><span>Drift</span></div></div>
+<div id="stage" aria-label="Globe showing waste entering and drifting through the oceans"></div>
 <div id="labels" aria-hidden="true"></div>
 
 <header id="brand" class="ui">
@@ -184,7 +214,7 @@ button{font:inherit;color:inherit}
     <button class="tog" role="switch" aria-checked="true" data-k="land"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 18h18"/><path d="M5 18l4-7 3 4 2-3 5 6"/></svg></span><span class="lbl"><strong>Land &amp; shipping</strong><small>Exports in transit, waste heading to rivers</small></span><span class="sw"></span></button>
     <button class="tog" role="switch" aria-checked="true" data-k="sea"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 9c2 0 2-1.5 4.5-1.5S10 9 12 9s2.5-1.5 4.5-1.5S19 9 21 9M3 15c2 0 2-1.5 4.5-1.5S10 15 12 15s2.5-1.5 4.5-1.5S19 15 21 15"/></svg></span><span class="lbl"><strong>Sea</strong><small>Everything after it reaches the ocean</small></span><span class="sw"></span></button>
     <button class="tog" role="switch" aria-checked="false" data-k="proj"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 18l5-5 4 3 7-8"/><path d="M15 8h5v5" stroke-dasharray="2 2"/></svg></span><span class="lbl"><strong>Potential (to 2040)</strong><small>Business-as-usual projection</small></span><span class="sw"></span></button>
-    <button class="tog" role="switch" aria-checked="true" data-k="globe"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c2.5 2.5 2.5 13.5 0 16M12 4c-2.5 2.5-2.5 13.5 0 16"/></svg></span><span class="lbl"><strong>Earth, sea &amp; land</strong><small>Turn off to isolate the waste</small></span><span class="sw"></span></button>
+    <button class="tog" role="switch" aria-checked="true" data-k="globe"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c2.5 2.5 2.5 13.5 0 16M12 4c-2.5 2.5-2.5 13.5 0 16"/></svg></span><span class="lbl"><strong>Glass ocean &amp; land</strong><small>Turn off to isolate the waste</small></span><span class="sw"></span></button>
     <button class="tog" role="switch" aria-checked="true" data-k="labels"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="7" cy="12" r="2.5"/><path d="M12 12h8"/></svg></span><span class="lbl"><strong>Named rivers &amp; sites</strong><small>Measured / modelled hotspots</small></span><span class="sw"></span></button>
   </div>
   <div class="legend">
@@ -192,7 +222,7 @@ button{font:inherit;color:inherit}
     <div class="ramp" role="img" aria-label="Grey in transit, blue when dumped, yellow then red as it drifts further"></div>
     <div class="ramp-l"><span>transit</span><span>0 km</span><span>5,000</span><span>15,000+</span></div>
     <div class="shapes">
-      <i>bottle</i><span>consumer packaging</span>
+      <i class="shp-bottle">bottle</i><span class="shp-bottle">consumer packaging</span>
       <i>duck</i><span>consumer goods</span>
       <i>drum</i><span>industrial / chemical waste</span>
     </div>
@@ -202,6 +232,7 @@ button{font:inherit;color:inherit}
 
 <footer id="dock" class="ui">
   <div class="dock-in">
+    <button id="themeBtn" role="switch" aria-checked="false" aria-label="Dopamine theme" title="Dopamine theme"><svg viewBox="13 16 93 53" aria-hidden="true"><rect class="pill" x="15.29" y="18.46" width="88.6" height="47.72" rx="23.86" ry="23.86"/><path class="face" d="M79.8,20.8c-11.85,0-21.46,9.61-21.46,21.46s9.61,21.46,21.46,21.46,21.46-9.61,21.46-21.46-9.61-21.46-21.46-21.46ZM85.81,30.68c1.49,0,2.69,2.81,2.69,6.28s-1.2,6.28-2.69,6.28-2.69-2.81-2.69-6.28,1.2-6.28,2.69-6.28ZM73.95,30.68c1.49,0,2.69,2.81,2.69,6.28s-1.2,6.28-2.69,6.28-2.69-2.81-2.69-6.28,1.2-6.28,2.69-6.28ZM94.81,46.38c-2.42,6.22-8.14,10.06-14.97,10.06-.09,0-.18,0-.27,0-6.85-.1-12.72-4.23-14.95-10.51-.16-.44.07-.93.52-1.09.44-.16.93.07,1.09.52,2.42,6.81,8.49,9.31,13.38,9.38,4.87.06,11.02-2.25,13.63-8.97.17-.44.66-.65,1.1-.48.44.17.65.66.48,1.1Z"/></svg></button>
     <button id="play" aria-label="Play"><svg viewBox="0 0 24 24" id="playIco"><path d="M8 5v14l11-7z"/></svg></button>
     <div class="year"><b id="yr">2017</b><span id="mo">June</span></div>
     <div class="track">
@@ -458,7 +489,6 @@ for(let k=0;k<70;k++){
 const stage=document.getElementById('stage');
 const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
 renderer.setPixelRatio(Math.min(2,window.devicePixelRatio||1));
-renderer.outputEncoding=THREE.sRGBEncoding;
 stage.appendChild(renderer.domElement);
 renderer.domElement.tabIndex=0;
 const scene=new THREE.Scene();
@@ -470,23 +500,66 @@ controls.enableDamping=true;controls.dampingFactor=0.08;controls.enablePan=false
 controls.minDistance=1.35;controls.maxDistance=7;controls.rotateSpeed=0.5;controls.zoomSpeed=0.7;
 controls.autoRotate=!reduceMotion;controls.autoRotateSpeed=0.35;
 
-scene.add(new THREE.HemisphereLight(0xcfe3ff,0x0b1520,0.85));
+const hemi=new THREE.HemisphereLight(0xcfe3ff,0x0b1520,0.85);scene.add(hemi);
 const sun=new THREE.DirectionalLight(0xffffff,0.9);sun.position.set(2,3,4);camera.add(sun);scene.add(camera);
 
-// Deep core
 const globeParts=[];
-const core=new THREE.Mesh(new THREE.SphereGeometry(0.968,96,64),new THREE.MeshBasicMaterial({color:0x07111b}));
-scene.add(core);globeParts.push(core);
-// Ocean shell with fresnel rim (translucent so the seabed shows)
-const shell=new THREE.Mesh(new THREE.SphereGeometry(1,96,64),new THREE.ShaderMaterial({
+const core=new THREE.Mesh(new THREE.SphereGeometry(0.968,96,64),new THREE.MeshBasicMaterial({color:0x07111b}));scene.add(core);
+const fresnel=new THREE.Mesh(new THREE.SphereGeometry(1,96,64),new THREE.ShaderMaterial({
  transparent:true,depthWrite:false,
  uniforms:{base:{value:new THREE.Color(0x10304a)},rim:{value:new THREE.Color(0x5aa0c8)}},
  vertexShader:'varying vec3 vN;varying vec3 vV;void main(){vec4 mv=modelViewMatrix*vec4(position,1.);vN=normalize(normalMatrix*normal);vV=normalize(-mv.xyz);gl_Position=projectionMatrix*mv;}',
  fragmentShader:'uniform vec3 base;uniform vec3 rim;varying vec3 vN;varying vec3 vV;void main(){float f=pow(1.-max(dot(vN,vV),0.),2.6);gl_FragColor=vec4(mix(base,rim,f),0.32+0.5*f);}'
+}));scene.add(fresnel);
+/* Themes */
+const THEMES={
+ current:{bg:'#060c13',grad:true,letter:'#132a3e',ramp:[0x8b939c,0x3d8bff,0xffd24a,0xff5a3d],dots:0x7fa6c2,tint:[0.10,0.24,0.36],tintAmt:0.38,rim:[0.45,0.72,0.9],disp:0.0,spark:'159,211,199',sparkP:'255,90,61'},
+ dopa:{bg:'#2459a0',grad:false,letter:'#db6e97',ramp:[0xe6e9f2,0x7fe0ff,0xffe066,0xff4f9a],dots:0xffd3e2,tint:[0.86,0.88,1.0],tintAmt:0.34,rim:[1.0,1.0,1.0],disp:0.045,spark:'255,170,200',sparkP:'255,224,102'}
+};
+let TH=THEMES.current;
+/* Background: colour + PLASTIC / DRIFT lettering drawn into a canvas so the glass can refract it */
+const bgCanvas=document.createElement('canvas');const bgTex=new THREE.CanvasTexture(bgCanvas);
+bgTex.minFilter=THREE.LinearFilter;bgTex.generateMipmaps=false;scene.background=bgTex;
+function drawBackground(){
+ const dpr=renderer.getPixelRatio(),W=Math.round(window.innerWidth*dpr),H=Math.round(window.innerHeight*dpr);
+ bgCanvas.width=W;bgCanvas.height=H;const c=bgCanvas.getContext('2d');
+ if(TH.grad){const g=c.createRadialGradient(W*.5,H*.42,0,W*.5,H*.42,Math.max(W,H)*.75);g.addColorStop(0,'#0f2234');g.addColorStop(.55,'#08121c');g.addColorStop(1,TH.bg);c.fillStyle=g;}else c.fillStyle=TH.bg;
+ c.fillRect(0,0,W,H);
+ const pad=Math.max(16,window.innerWidth>820?14:16)*dpr;
+ c.font='800 100px "Big Shoulders Display","Arial Narrow",Impact,sans-serif';
+ const m=c.measureText('PLASTIC');const capH=(m.actualBoundingBoxAscent||72)/100;const wid=m.width/100;
+ const gap=0.07;const fs=Math.min((W-pad*2)/wid,(H*0.9)/(2*capH+gap));
+ c.font='800 '+fs+'px "Big Shoulders Display","Arial Narrow",Impact,sans-serif';c.fillStyle=TH.letter;c.textBaseline='alphabetic';
+ const total=fs*(2*capH+gap);const y1=(H-total)/2+fs*capH;
+ c.fillText('PLASTIC',pad,y1);c.fillText('DRIFT',pad,y1+fs*(capH+gap));
+ bgTex.needsUpdate=true;
+}
+/* Solid glass ocean: screen-space refraction of everything behind it, with optional dispersion */
+const rt=new THREE.WebGLRenderTarget(4,4,{minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter});
+const glassU={tScene:{value:rt.texture},res:{value:new THREE.Vector2(1,1)},rad:{value:0.3},tint:{value:new THREE.Vector3()},tintAmt:{value:0.3},rim:{value:new THREE.Vector3(1,1,1)},disp:{value:0}};
+const shell=new THREE.Mesh(new THREE.SphereGeometry(1,128,96),new THREE.ShaderMaterial({
+ uniforms:glassU,
+ vertexShader:'varying vec3 vN;varying vec3 vV;void main(){vec4 mv=modelViewMatrix*vec4(position,1.);vN=normalize(normalMatrix*normal);vV=normalize(-mv.xyz);gl_Position=projectionMatrix*mv;}',
+ fragmentShader:[
+  'uniform sampler2D tScene;uniform vec2 res;uniform float rad;uniform vec3 tint;uniform float tintAmt;uniform vec3 rim;uniform float disp;',
+  'varying vec3 vN;varying vec3 vV;',
+  'vec2 lens(vec3 n,float ndv,float k){float bend=1.0-ndv*ndv;vec2 o=-n.xy*rad*k*(0.55+0.9*bend);o.x*=res.y/res.x;return o;}',
+  'void main(){vec3 n=normalize(vN);vec3 v=normalize(vV);float ndv=clamp(dot(n,v),0.,1.);',
+  ' vec2 uv=gl_FragCoord.xy/res;',
+  ' float r=texture2D(tScene,clamp(uv+lens(n,ndv,1.0-disp),0.001,0.999)).r;',
+  ' float g=texture2D(tScene,clamp(uv+lens(n,ndv,1.0),0.001,0.999)).g;',
+  ' float b=texture2D(tScene,clamp(uv+lens(n,ndv,1.0+disp),0.001,0.999)).b;',
+  ' vec3 col=mix(vec3(r,g,b),tint,tintAmt);',
+  ' float f=pow(1.0-ndv,3.0);col=mix(col,rim,f*0.55);',
+  ' vec3 L=normalize(vec3(-0.45,0.6,0.65));vec3 h=normalize(L+v);float sp=pow(max(dot(n,h),0.),140.)*1.4+pow(max(dot(n,h),0.),18.)*0.12;',
+  ' vec3 L2=normalize(vec3(0.6,-0.4,0.5));float sp2=pow(max(dot(n,normalize(L2+v)),0.),60.)*0.35;',
+  ' col+=vec3(sp+sp2);gl_FragColor=vec4(col,1.0);}'
+ ].join('\n')
 }));
-scene.add(shell);globeParts.push(shell);
+scene.add(shell);
 
 // Land as a dot matrix (hand-simplified outlines, [lon,lat])
+let dots=null;
 const LAND=[
  [[-168,66],[-162,70],[-156,71],[-140,70],[-128,70],[-115,68],[-95,72],[-82,73],[-80,63],[-90,57],[-82,52],[-78,60],[-65,60],[-60,55],[-56,52],[-66,45],[-70,42],[-76,38],[-76,35],[-81,31],[-80,26],[-82,26],[-84,30],[-90,29],[-97,27],[-97,22],[-92,18],[-88,21],[-87,16],[-83,10],[-79,8],[-77,8],[-80,7],[-85,10],[-92,14],[-105,20],[-110,24],[-112,30],[-115,30],[-110,23],[-117,32],[-121,35],[-124,40],[-124,46],[-123,49],[-130,55],[-138,59],[-150,60],[-152,58],[-158,56],[-165,54],[-160,58],[-165,62]],
  [[-120,74],[-110,78],[-90,80],[-70,83],[-62,82],[-80,76],[-90,74],[-100,73]],
@@ -518,8 +591,8 @@ function onLand(lon,lat){for(const P of polys){if(lon<P.a||lon>P.b||lat<P.c||lat
  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
  const cv=document.createElement('canvas');cv.width=cv.height=32;const cx=cv.getContext('2d');cx.fillStyle='#fff';cx.beginPath();cx.arc(16,16,13,0,7);cx.fill();
  const tex=new THREE.CanvasTexture(cv);
- const dots=new THREE.Points(g,new THREE.PointsMaterial({size:0.0095,map:tex,transparent:true,alphaTest:0.4,color:0x7fa6c2,sizeAttenuation:true,depthWrite:false}));
- scene.add(dots);globeParts.push(dots);
+ dots=new THREE.Points(g,new THREE.PointsMaterial({size:0.0095,map:tex,transparent:true,alphaTest:0.4,color:0x7fa6c2,sizeAttenuation:true,depthWrite:false}));
+ scene.add(dots);
 }
 
 // Object geometries
@@ -534,9 +607,19 @@ const GEO=[
  lathe([[0,0],[.42,0],[.45,.04],[.47,.25],[.5,.27],[.47,.29],[.49,.5],[.47,.71],[.5,.73],[.47,.75],[.45,.96],[.42,1],[0,1]],10)
 ];
 const SCALE=[0.022,0.02,0.02];
+/* Rubber duck model (STL) used for sea objects in the dopamine theme */
+const DUCK_STL='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';
+const duckGeo=(function(){const bin=atob(DUCK_STL);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);
+ const dv=new DataView(u.buffer);const n=dv.getUint32(80,true);const pos=new Float32Array(n*9);
+ for(let i=0;i<n;i++){const o=84+i*50+12;for(let k=0;k<9;k++)pos[i*9+k]=dv.getFloat32(o+k*4,true);}
+ const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));
+ g.rotateX(-Math.PI/2);g.computeBoundingBox();const bb=g.boundingBox,c=new THREE.Vector3();bb.getCenter(c);g.translate(-c.x,-c.y,-c.z);
+ const sz=new THREE.Vector3();bb.getSize(sz);const k=1.15/Math.max(sz.x,sz.y,sz.z);g.scale(k,k,k);g.computeVertexNormals();return g;})();
+const lowDuck=GEO[1];
 const cap=[[0,0,0],[0,0,0]];
 for(const it of sea)cap[it.proj][it.kind]++;
 for(const s of ships)cap[s.proj][s.kind]++;
+for(let p=0;p<2;p++)cap[p][1]+=cap[p][0];
 const meshes=[[],[]];
 for(let p=0;p<2;p++)for(let k=0;k<3;k++){
  const mat=new THREE.MeshStandardMaterial({color:0xffffff,roughness:.45,metalness:.05,transparent:p===1,opacity:p===1?.42:1,depthWrite:p===0});
@@ -555,8 +638,8 @@ const labelHost=document.getElementById('labels');
 const labelEls=LABELS.map(l=>{const d=document.createElement('div');d.className='gl'+(l[4]?' toxic':'');d.innerHTML=l[0]+' <em>'+l[3]+'</em>';labelHost.appendChild(d);return{el:d,v:ll2v(l[1],l[2],1.004,new THREE.Vector3())};});
 
 /* ---------- state ---------- */
-const state={t:2017.45,playing:false,speed:2,floats:true,sinks:true,toxic:true,land:true,sea:true,proj:false,labels:true,globe:true,dirty:true};
-const cGrey=new THREE.Color(0x8b939c),cBlue=new THREE.Color(0x3d8bff),cYel=new THREE.Color(0xffd24a),cRed=new THREE.Color(0xff5a3d);
+const state={t:2017.45,playing:false,speed:2,floats:true,sinks:true,toxic:true,land:true,sea:true,proj:false,labels:true,globe:true,dopa:false,dirty:true};
+const cGrey=new THREE.Color(),cBlue=new THREE.Color(),cYel=new THREE.Color(),cRed=new THREE.Color();
 const tmpC=new THREE.Color(),tmpV=new THREE.Vector3(),tmpA=new THREE.Vector3(),dummy=new THREE.Object3D();
 function colorByKm(km,out){if(km<5000)return out.copy(cBlue).lerp(cYel,km/5000);return out.copy(cYel).lerp(cRed,Math.min(1,(km-5000)/10000));}
 function drift(it,dt){
@@ -595,7 +678,8 @@ function update(){
   else{const p=drift(it,s);lat=p[0];lon=p[1];km=3000*s;spin=s;}
   ll2v(lat,lon,r,tmpV);
   colorByKm(km,tmpC);
-  place(m,n[it.proj][it.kind]++,tmpV,sc,it.ra+spin*it.spin,it.rb+spin*it.spin*.6,it.rc,tmpC);
+  const kk=(state.dopa&&it.kind===0)?1:it.kind;
+  place(meshes[it.proj][kk],n[it.proj][kk]++,tmpV,kk===1&&state.dopa?0.096*(1+it.jit*1.1):sc,it.ra+spin*it.spin,it.rb+spin*it.spin*.6,it.rc,tmpC);
   cSea++;
  }
  if(state.land){
@@ -631,11 +715,11 @@ function drawSpark(){
  const bw=w/yrs;
  c.strokeStyle='rgba(150,180,205,.12)';c.lineWidth=1;c.beginPath();c.moveTo(0,h-.5);c.lineTo(w,h-.5);c.stroke();
  for(let y=y0;y<=y1;y++){const v=(annual[y]||0)/mx;const bh=Math.max(1,v*(h-4));const x=(y-y0)*bw;
-  const cur=y<=Math.floor(state.t);c.fillStyle=y>2024?(cur?'rgba(255,90,61,.55)':'rgba(255,90,61,.22)'):(cur?'rgba(159,211,199,.85)':'rgba(159,211,199,.25)');
+  const cur=y<=Math.floor(state.t);c.fillStyle=y>2024?(cur?'rgba('+TH.sparkP+',.6)':'rgba('+TH.sparkP+',.22)'):(cur?'rgba('+TH.spark+',.9)':'rgba('+TH.spark+',.28)');
   c.fillRect(x+bw*.15,h-bh,Math.max(1,bw*.7),bh);}
  // trade era marker
  const xm=(1988-y0)*bw;c.strokeStyle='rgba(139,147,156,.6)';c.setLineDash([2,3]);c.beginPath();c.moveTo(xm,0);c.lineTo(xm,h);c.stroke();c.setLineDash([]);
- c.fillStyle='#8597a8';c.font='10px "IBM Plex Mono", monospace';c.fillText('trade data →',xm+4,10);
+ c.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--muted');c.font='10px "IBM Plex Mono", monospace';c.fillText('trade data →',xm+4,10);
 }
 function drawTicks(){
  const T=$('ticks');T.innerHTML='';const y1=maxT();const span=y1-1950;
@@ -651,7 +735,7 @@ document.querySelectorAll('.tog').forEach(b=>b.addEventListener('click',()=>{
  const k=b.dataset.k;state[k]=!state[k];b.setAttribute('aria-checked',state[k]);
  if(k==='proj'){scrub.max=maxT();setT(state.proj&&state.t>=2024.9?2025:state.t);drawSpark();drawTicks();}
  if(k==='labels')labelHost.hidden=!state.labels;
- if(k==='globe')globeParts.forEach(o=>o.visible=state.globe);
+ if(k==='globe')syncGlobe();
  state.dirty=true;
 }));
 // Orbit pad
@@ -678,22 +762,35 @@ $('closeAbout').addEventListener('click',()=>{$('about').hidden=true;$('openAbou
 $('about').addEventListener('click',e=>{if(e.target.id==='about')$('about').hidden=true;});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')$('about').hidden=true;});
 
-// Background lettering: fill the viewport width, capped so both lines fit the height
-const bigType=document.getElementById('bigtype');
-function fitType(){
- const spans=bigType.querySelectorAll('span');spans.forEach(s=>s.style.fontSize='100px');
- let wMax=0;spans.forEach(s=>wMax=Math.max(wMax,s.getBoundingClientRect().width));
- if(!wMax)return;
- const byW=100*(window.innerWidth-Math.max(16,parseFloat(getComputedStyle(bigType).paddingLeft)||16)*2)/wMax, byH=window.innerHeight*0.98/(spans.length*0.84);
- const fs=Math.min(byW,byH)+'px';spans.forEach(s=>s.style.fontSize=fs);
+function syncGlobe(){
+ const g=state.globe;core.visible=g&&!state.dopa;fresnel.visible=g&&!state.dopa;shell.visible=g&&state.dopa;if(dots)dots.visible=g;
 }
-if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitType);
+function applyTheme(){
+ TH=state.dopa?THEMES.dopa:THEMES.current;
+ document.documentElement.classList.toggle('dopa',state.dopa);
+ const tb=document.getElementById('themeBtn');tb.setAttribute('aria-checked',state.dopa);
+ cGrey.setHex(TH.ramp[0]);cBlue.setHex(TH.ramp[1]);cYel.setHex(TH.ramp[2]);cRed.setHex(TH.ramp[3]);
+ glassU.tint.value.set(TH.tint[0],TH.tint[1],TH.tint[2]);glassU.tintAmt.value=TH.tintAmt;glassU.rim.value.set(TH.rim[0],TH.rim[1],TH.rim[2]);glassU.disp.value=TH.disp;
+ if(dots)dots.material.color.setHex(TH.dots);
+ for(let p=0;p<2;p++)meshes[p][1].geometry=state.dopa?duckGeo:lowDuck;
+ renderer.outputEncoding=state.dopa?THREE.LinearEncoding:THREE.sRGBEncoding;
+ bgTex.encoding=state.dopa?THREE.LinearEncoding:THREE.sRGBEncoding;
+ if(state.dopa){hemi.color.setHex(0xe4efff);hemi.groundColor.setHex(0x22344a);hemi.intensity=1.0;sun.intensity=0.85;}
+ else{hemi.color.setHex(0xcfe3ff);hemi.groundColor.setHex(0x0b1520);hemi.intensity=0.85;sun.intensity=0.9;}
+ scene.traverse(o=>{if(o.material)o.material.needsUpdate=true;});
+ syncGlobe();
+ drawBackground();drawSpark();state.dirty=true;
+ try{localStorage.setItem('pd-theme',state.dopa?'dopa':'current');}catch(e){}
+}
+try{state.dopa=localStorage.getItem('pd-theme')==='dopa';}catch(e){}
+document.getElementById('themeBtn').addEventListener('click',()=>{state.dopa=!state.dopa;applyTheme();});
+if(document.fonts&&document.fonts.load)document.fonts.load('800 100px "Big Shoulders Display"').then(drawBackground,()=>{});
 function resize(){
- fitType();
  const w=window.innerWidth,h=window.innerHeight;renderer.setSize(w,h);camera.aspect=w/h;
- camera.fov=w<600?48:36;camera.updateProjectionMatrix();drawSpark();drawTicks();syncLayers();
+ const db=renderer.getDrawingBufferSize(new THREE.Vector2());rt.setSize(db.x,db.y);glassU.res.value.copy(db);
+ camera.fov=w<600?48:36;camera.updateProjectionMatrix();drawBackground();drawSpark();drawTicks();syncLayers();
 }
-window.addEventListener('resize',resize);resize();
+window.addEventListener('resize',resize);resize();applyTheme();
 
 /* ---------- loop ---------- */
 let last=performance.now(),sparkYear=-1;
@@ -712,6 +809,10 @@ function frame(now){
    if(!facing){L.el.style.display='none';continue;}
    tmpV.copy(L.v).project(camera);L.el.style.display='flex';
    L.el.style.transform='translate('+((tmpV.x*.5+.5)*w-3)+'px,'+((-tmpV.y*.5+.5)*h-6)+'px)';}
+ }
+ if(state.globe&&state.dopa){
+  const d=camera.position.length();glassU.rad.value=Math.tan(Math.asin(Math.min(0.999,1/d)))/Math.tan(camera.fov*DEG/2)*0.5;
+  shell.visible=false;renderer.setRenderTarget(rt);renderer.render(scene,camera);renderer.setRenderTarget(null);shell.visible=true;
  }
  renderer.render(scene,camera);requestAnimationFrame(frame);
 }
