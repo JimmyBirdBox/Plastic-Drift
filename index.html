@@ -103,7 +103,7 @@ button{font:inherit;color:inherit}
 
 /* Timeline dock */
 #dock{left:0;right:0;bottom:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-bottom:calc(14px + env(safe-area-inset-bottom,0px));padding-top:12px;background:linear-gradient(0deg,rgba(var(--bg-rgb),.96) 30%,rgba(var(--bg-rgb),0))}
-.dock-in{display:grid;grid-template-columns:auto auto auto 1fr auto;gap:16px;align-items:end;max-width:1400px;margin:0 auto}
+.dock-in{display:grid;grid-template-columns:auto auto 1fr auto;gap:16px;align-items:end;max-width:1400px;margin:0 auto}
 #play{width:48px;height:48px;border-radius:50%;border:1px solid rgba(var(--acc-rgb),.5);background:rgba(var(--acc-rgb),.12);color:var(--glass);cursor:pointer;display:grid;place-items:center}
 #play:hover{background:rgba(var(--acc-rgb),.22)}
 #play svg{width:20px;height:20px;fill:currentColor}
@@ -126,12 +126,13 @@ button{font:inherit;color:inherit}
 .speed button[aria-pressed="true"]{color:var(--glass);border-color:rgba(var(--acc-rgb),.5)}
 
 /* Theme switch (smiley) */
-#themeBtn{background:none;border:0;padding:4px;cursor:pointer;color:var(--title);display:grid;place-items:center;border-radius:12px;align-self:center}
-#themeBtn svg{width:72px;height:auto;display:block;overflow:visible}
+#themeBtn{position:fixed;z-index:6;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));background:none;border:0;padding:0;cursor:pointer;color:var(--title);display:block;border-radius:24px}
+#dock{padding-left:calc(max(16px,env(safe-area-inset-left,0px)) + 92px)!important}
+#themeBtn svg{width:76px;height:auto;display:block;overflow:visible}
 #themeBtn .pill{fill:none;stroke:currentColor;stroke-width:1.6px}
 #themeBtn .face{fill:currentColor;transform:translateX(-40.65px);transition:transform .35s cubic-bezier(.5,1.6,.4,1)}
 #themeBtn[aria-checked="true"] .face{transform:translateX(0)}
-#themeBtn:hover{background:rgba(var(--acc-rgb),.1)}
+#themeBtn:hover{opacity:.8}
 .dopa .shp-bottle{display:none}
 /* Globe labels */
 #labels{position:fixed;inset:0;pointer-events:none;z-index:3}
@@ -161,7 +162,7 @@ button{font:inherit;color:inherit}
   #layersBtn{display:block;position:fixed;right:max(16px,env(safe-area-inset-right,0px));top:calc(14px + env(safe-area-inset-top,0px));z-index:6;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 12px;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
   #layers{top:calc(58px + env(safe-area-inset-top,0px));width:min(300px,calc(100% - 32px));max-height:calc(100% - 230px)}
   #layers.closed{display:none}
-  .dock-in{grid-template-columns:auto auto 1fr;gap:10px 12px}
+  .dock-in{grid-template-columns:auto 1fr;gap:10px 12px}
   .track{grid-column:1/-1;order:3}
   .speed{grid-column:1/-1;order:4;justify-content:flex-end}
   .year b{font-size:38px}
@@ -230,9 +231,9 @@ button{font:inherit;color:inherit}
   </div>
 </aside>
 
+<button id="themeBtn" class="ui" role="switch" aria-checked="false" aria-label="Dopamine theme" title="Dopamine theme"><svg viewBox="14.49 17.66 90.2 49.32" aria-hidden="true"><rect class="pill" x="15.29" y="18.46" width="88.6" height="47.72" rx="23.86" ry="23.86"/><path class="face" d="M79.8,20.8c-11.85,0-21.46,9.61-21.46,21.46s9.61,21.46,21.46,21.46,21.46-9.61,21.46-21.46-9.61-21.46-21.46-21.46ZM85.81,30.68c1.49,0,2.69,2.81,2.69,6.28s-1.2,6.28-2.69,6.28-2.69-2.81-2.69-6.28,1.2-6.28,2.69-6.28ZM73.95,30.68c1.49,0,2.69,2.81,2.69,6.28s-1.2,6.28-2.69,6.28-2.69-2.81-2.69-6.28,1.2-6.28,2.69-6.28ZM94.81,46.38c-2.42,6.22-8.14,10.06-14.97,10.06-.09,0-.18,0-.27,0-6.85-.1-12.72-4.23-14.95-10.51-.16-.44.07-.93.52-1.09.44-.16.93.07,1.09.52,2.42,6.81,8.49,9.31,13.38,9.38,4.87.06,11.02-2.25,13.63-8.97.17-.44.66-.65,1.1-.48.44.17.65.66.48,1.1Z"/></svg></button>
 <footer id="dock" class="ui">
   <div class="dock-in">
-    <button id="themeBtn" role="switch" aria-checked="false" aria-label="Dopamine theme" title="Dopamine theme"><svg viewBox="13 16 93 53" aria-hidden="true"><rect class="pill" x="15.29" y="18.46" width="88.6" height="47.72" rx="23.86" ry="23.86"/><path class="face" d="M79.8,20.8c-11.85,0-21.46,9.61-21.46,21.46s9.61,21.46,21.46,21.46,21.46-9.61,21.46-21.46-9.61-21.46-21.46-21.46ZM85.81,30.68c1.49,0,2.69,2.81,2.69,6.28s-1.2,6.28-2.69,6.28-2.69-2.81-2.69-6.28,1.2-6.28,2.69-6.28ZM73.95,30.68c1.49,0,2.69,2.81,2.69,6.28s-1.2,6.28-2.69,6.28-2.69-2.81-2.69-6.28,1.2-6.28,2.69-6.28ZM94.81,46.38c-2.42,6.22-8.14,10.06-14.97,10.06-.09,0-.18,0-.27,0-6.85-.1-12.72-4.23-14.95-10.51-.16-.44.07-.93.52-1.09.44-.16.93.07,1.09.52,2.42,6.81,8.49,9.31,13.38,9.38,4.87.06,11.02-2.25,13.63-8.97.17-.44.66-.65,1.1-.48.44.17.65.66.48,1.1Z"/></svg></button>
     <button id="play" aria-label="Play"><svg viewBox="0 0 24 24" id="playIco"><path d="M8 5v14l11-7z"/></svg></button>
     <div class="year"><b id="yr">2017</b><span id="mo">June</span></div>
     <div class="track">
